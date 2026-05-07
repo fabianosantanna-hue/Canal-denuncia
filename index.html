@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canal de Denúncias Empresa</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:Arial, sans-serif;
+        background:#f4f4f4;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+        padding:20px;
+    }
+
+    .container{
+        background:#fff;
+        width:100%;
+        max-width:500px;
+        border-radius:15px;
+        padding:25px;
+        box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+        text-align:center;
+        color:#222;
+        margin-bottom:10px;
+    }
+
+    .info{
+        background:#eef7ff;
+        color:#333;
+        padding:15px;
+        border-radius:10px;
+        margin-bottom:20px;
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    textarea{
+        width:100%;
+        height:180px;
+        border:1px solid #ccc;
+        border-radius:10px;
+        padding:15px;
+        resize:none;
+        font-size:16px;
+        box-sizing:border-box;
+    }
+
+    input[type=file]{
+        margin-top:15px;
+        width:100%;
+    }
+
+    button{
+        width:100%;
+        margin-top:20px;
+        background:#0088cc;
+        color:#fff;
+        border:none;
+        padding:15px;
+        border-radius:10px;
+        font-size:18px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    button:hover{
+        background:#006fa6;
+    }
+
+    .status{
+        text-align:center;
+        margin-top:15px;
+        font-weight:bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Canal de Denúncias</h1>
+
+<div class="info">
+Sua denúncia será enviada de forma anônima.<br><br>
+Nenhum número de telefone será compartilhado.<br>
+Nenhum dado pessoal será solicitado.
+</div>
+
+<textarea id="mensagem" placeholder="Digite sua denúncia aqui..."></textarea>
+
+<input type="file" id="foto" accept="image/*">
+
+<button onclick="enviarDenuncia()">Enviar denúncia</button>
+
+<div class="status" id="status"></div>
+
+</div>
+
+<script>
+
+const TOKEN = "8611574092:AAH-RAvd4zxt6jQxvnh895FRsIPwO0O17-w";
+const CHAT_ID = "1712799321";
+
+async function enviarDenuncia(){
+
+    const mensagem = document.getElementById("mensagem").value;
+    const foto = document.getElementById("foto").files[0];
+    const status = document.getElementById("status");
+
+    if(!mensagem && !foto){
+        status.innerHTML = "Digite uma denúncia ou envie uma imagem.";
+        return;
+    }
+
+    status.innerHTML = "Enviando denúncia...";
+
+    try{
+
+        let texto =
+`🚨 NOVA DENÚNCIA ANÔNIMA
+
+${mensagem || "Imagem enviada sem texto"}
+
+📅 ${new Date().toLocaleString()}
+`;
+
+        if(foto){
+
+            let formData = new FormData();
+
+            formData.append("chat_id", CHAT_ID);
+            formData.append("caption", texto);
+            formData.append("photo", foto);
+
+            await fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`,{
+                method:"POST",
+                body:formData
+            });
+
+        }else{
+
+            await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: texto
+                })
+            });
+
+        }
+
+        status.innerHTML = "Denúncia enviada com sucesso.";
+
+        document.getElementById("mensagem").value = "";
+        document.getElementById("foto").value = "";
+
+    }catch(e){
+
+        status.innerHTML = "Erro ao enviar denúncia.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
