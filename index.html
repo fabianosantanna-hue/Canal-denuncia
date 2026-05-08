@@ -375,54 +375,65 @@ async function enviarDenuncia(){
 
     try{
 
+        const categorias = Array.from(
+            document.querySelectorAll('input[name="categoria"]:checked')
+        )
+        .map(el => el.value)
+        .join(", ");
+
         let mensagem = `
 🚨 NOVA DENÚNCIA ANÔNIMA
 
 📌 Categoria:
-${Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
-.map(el => el.value)
-.join(", ")}
+${categorias || "Não informado"}
 
 🏢 Unidade:
-${document.getElementById("unidade").value}
+${document.getElementById("unidade").value || "Não informado"}
 
 👤 Relação:
-${document.getElementById("relacao").value}
+${document.getElementById("relacao").value || "Não informado"}
 
 📍 Local:
-${document.getElementById("local").value}
+${document.getElementById("local").value || "Não informado"}
 
 👥 Outras pessoas sabem?
-${document.getElementById("conhecimento").value}
+${document.getElementById("conhecimento").value || "Não informado"}
 
 🧠 Quem sabia:
-${document.getElementById("quemSoube").value}
+${document.getElementById("quemSoube").value || "Não informado"}
 
 ⚠️ É vítima?
-${document.getElementById("vitima").value}
+${document.getElementById("vitima").value || "Não informado"}
 
 🚨 Denunciados:
-${document.getElementById("denunciados").value}
+${document.getElementById("denunciados").value || "Não informado"}
 
 📝 Descrição:
-${document.getElementById("descricao").value}
+${document.getElementById("descricao").value || "Não informado"}
 
 👁️ Testemunhas:
-${document.getElementById("testemunhas").value}
+${document.getElementById("testemunhas").value || "Não informado"}
 
 📅 ${new Date().toLocaleString()}
 `;
 
-        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                chat_id:CHAT_ID,
-                text:mensagem
-            })
-        });
+        const respostaMensagem = await fetch(
+            `https://api.telegram.org/bot${TOKEN}/sendMessage`,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    chat_id:CHAT_ID,
+                    text:mensagem
+                })
+            }
+        );
+
+        if(!respostaMensagem.ok){
+            throw new Error("Erro ao enviar mensagem");
+        }
 
         const arquivos = document.getElementById("foto").files;
 
@@ -433,14 +444,23 @@ ${document.getElementById("testemunhas").value}
             formData.append("chat_id", CHAT_ID);
             formData.append("photo", arquivos[i]);
 
-            await fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`,{
-                method:"POST",
-                body:formData
-            });
+            const respostaFoto = await fetch(
+                `https://api.telegram.org/bot${TOKEN}/sendPhoto`,
+                {
+                    method:"POST",
+                    body:formData
+                }
+            );
+
+            if(!respostaFoto.ok){
+                throw new Error("Erro ao enviar foto");
+            }
 
         }
 
         status.innerHTML = "✅ Denúncia enviada com sucesso.";
+
+        document.querySelector("form")?.reset();
 
         window.scrollTo({
             top:0,
@@ -449,12 +469,13 @@ ${document.getElementById("testemunhas").value}
 
     }catch(e){
 
+        console.error(e);
+
         status.innerHTML = "❌ Erro ao enviar denúncia.";
 
     }
 
 }
-
 </script>
 
 </body>
