@@ -3,171 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canal de Denúncias Empresa</title>
+
+<title>Canal de Denúncias Embraterr</title>
 
 <style>
-    body{
-        margin:0;
-        font-family:Arial, sans-serif;
-        background:#f4f4f4;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        min-height:100vh;
-        padding:20px;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#eef2f7;
+    padding:30px 15px;
+    color:#222;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+}
+
+.header{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    padding:35px;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.header h1{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.header p{
+    line-height:1.7;
+    font-size:15px;
+}
+
+.warning{
+    margin-top:20px;
+    background:rgba(255,255,255,0.1);
+    padding:15px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.card h2{
+    font-size:18px;
+    margin-bottom:15px;
+    color:#0f172a;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:15px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+    margin-top:10px;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.radio-group{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:12px;
+    margin-top:15px;
+}
+
+.radio-item{
+    background:#f8fafc;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #e2e8f0;
+}
+
+.radio-item input{
+    width:auto;
+    margin-right:10px;
+}
+
+.upload{
+    padding:20px;
+    border:2px dashed #94a3b8;
+    border-radius:15px;
+    text-align:center;
+    background:#f8fafc;
+}
+
+button{
+    width:100%;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    border:none;
+    padding:18px;
+    border-radius:14px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    opacity:0.95;
+}
+
+.status{
+    text-align:center;
+    margin-top:20px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#64748b;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .header h1{
+        font-size:26px;
     }
 
-    .container{
-        background:#fff;
-        width:100%;
-        max-width:500px;
-        border-radius:15px;
-        padding:25px;
-        box-shadow:0 0 15px rgba(0,0,0,0.1);
-    }
+}
 
-    h1{
-        text-align:center;
-        color:#222;
-        margin-bottom:10px;
-    }
-
-    .info{
-        background:#eef7ff;
-        color:#333;
-        padding:15px;
-        border-radius:10px;
-        margin-bottom:20px;
-        font-size:14px;
-        line-height:1.5;
-    }
-
-    textarea{
-        width:100%;
-        height:180px;
-        border:1px solid #ccc;
-        border-radius:10px;
-        padding:15px;
-        resize:none;
-        font-size:16px;
-        box-sizing:border-box;
-    }
-
-    input[type=file]{
-        margin-top:15px;
-        width:100%;
-    }
-
-    button{
-        width:100%;
-        margin-top:20px;
-        background:#0088cc;
-        color:#fff;
-        border:none;
-        padding:15px;
-        border-radius:10px;
-        font-size:18px;
-        cursor:pointer;
-        transition:0.3s;
-    }
-
-    button:hover{
-        background:#006fa6;
-    }
-
-    .status{
-        text-align:center;
-        margin-top:15px;
-        font-weight:bold;
-    }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-<h1>Canal de Denúncias</h1>
+<div class="header">
+    <h1>Canal de Denúncias Embraterr</h1>
 
-<div class="info">
-Sua denúncia será enviada de forma anônima.<br><br>
-Nenhum número de telefone será compartilhado.<br>
-Nenhum dado pessoal será solicitado.
+    <p>
+        O Canal de Denúncias da Embraterr está disponível para qualquer pessoa,
+        seja colaborador ou não, que deseje relatar suspeitas ou possíveis violações
+        ao nosso Código de Conduta.
+        <br><br>
+        Viu algo errado? Não se cale.
+    </p>
+
+    <div class="warning">
+        ✅ 100% anônimo<br>
+        ✅ Sem identificação<br>
+        ✅ Sem rastreamento de telefone
+    </div>
 </div>
 
-<textarea id="mensagem" placeholder="Digite sua denúncia aqui..."></textarea>
+<div class="card">
 
-<input type="file" id="foto" accept="image/*">
+    <h2>Selecione a categoria da denúncia</h2>
 
-<button onclick="enviarDenuncia()">Enviar denúncia</button>
+    <div class="radio-group">
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Assédio moral">
+            Assédio moral
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Assédio sexual">
+            Assédio sexual
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Gestão inadequada de pessoas">
+            Gestão inadequada de pessoas
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Discriminação">
+            Discriminação
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Fraude">
+            Fraude
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Corrupção">
+            Corrupção
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Conflito de interesses">
+            Conflito de interesses
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Atividades ilegais">
+            Atividades ilegais
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Irregularidades contratuais">
+            Irregularidades contratuais
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Saúde e segurança operacional">
+            Saúde e segurança operacional
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Impactos ambientais">
+            Impactos ambientais
+        </label>
+
+        <label class="radio-item">
+            <input type="checkbox" name="categoria" value="Risco operacional">
+            Risco operacional
+        </label>
+
+    </div>
+
+</div>
+        
+    </select>
+</div>
+
+<div class="card">
+    <h2>Em qual unidade ocorreu a situação?</h2>
+
+    <select id="unidade">
+
+    <option value="" selected disabled>
+        Selecione a unidade
+    </option>
+
+    <option>João Monlevade (Matriz)</option>
+    <option>Cocais das Estrelas</option>
+    <option>Nova Era</option>
+    <option>Santa Bárbara</option>
+    <option>Santana do Paraíso</option>
+
+</select>
+</div>
+
+<div class="card">
+    <h2>Qual sua relação com a Embraterr?</h2>
+
+    <select id="relacao">
+
+    <option value="" selected disabled>
+        Selecione sua relação com a empresa
+    </option>
+        <option>Funcionário Embraterr</option>
+        <option>Ex-funcionário</option>
+        <option>Funcionário terceirizado</option>
+        <option>Ex-funcionário terceirizado</option>
+        <option>Membro de comunidade próxima</option>
+        <option>Fornecedor / Prestador</option>
+        <option>Outro</option>
+    </select>
+</div>
+
+<div class="card">
+    <h2>Local onde ocorreu</h2>
+    <input type="text" id="local"
+placeholder="Exemplo: Galpão principal, oficina, setor administrativo...">
+</div>
+
+<div class="card">
+    <h2>Outras pessoas possuem conhecimento?</h2>
+
+    <select id="conhecimento">
+
+    <option value="" selected disabled>
+        Selecione uma opção
+    </option>
+        <option>Sim</option>
+        <option>Não</option>
+        <option>Talvez</option>
+    </select>
+</div>
+
+<div class="card">
+    <h2>Descreva quem teve conhecimento do caso</h2>
+    <textarea id="quemSoube"
+placeholder="Ex.: supervisores, colegas de trabalho, líderes, terceiros ou outras pessoas que presenciaram ou tiveram conhecimento da situação."></textarea>
+</div>
+
+<div class="card">
+    <h2>Você é uma das vítimas?</h2>
+
+    <select id="vitima">
+
+    <option value="" selected disabled>
+        Selecione uma opção
+    </option>
+        <option>Sim</option>
+        <option>Não</option>
+    </select>
+</div>
+
+<div class="card">
+    <h2>Qual o nome da(s) pessoa(s) que você quer denunciar?</h2>
+    <textarea id="denunciados"
+placeholder="Informe nomes, cargos, setores, unidades ou qualquer informação que ajude na identificação dos envolvidos."></textarea>
+</div>
+
+<div class="card">
+    <h2>Descreva sua denúncia</h2>
+
+    <textarea id="descricao"
+placeholder="Relate detalhadamente o ocorrido, envolvidos, datas, horários, evidências e demais informações importantes."></textarea>
+</div>
+
+<div class="card">
+    <h2>Testemunhas</h2>
+    <textarea id="testemunhas"
+    placeholder="Caso existam testemunhas, escreva sobre elas. Dados como nome completo, telefone, cargo, área e/ou unidade são importantes para o processo da denúncia."></textarea>
+
+</div>
+
+<div class="card">
+    <h2>Anexar evidências</h2>
+
+    <div class="upload">
+        <input type="file" id="foto" multiple accept="image/*">
+    </div>
+</div>
+
+<button onclick="enviarDenuncia()">
+    Enviar denúncia
+</button>
 
 <div class="status" id="status"></div>
+
+<div class="footer">
+    Canal seguro e confidencial.
+</div>
 
 </div>
 
 <script>
 
-const TOKEN = "8611574092:AAH-RAvd4zxt6jQxvnh895FRsIPwO0O17-w";
+const TOKEN = "SEU_TOKEN";
 const CHAT_ID = "1712799321";
 
 async function enviarDenuncia(){
 
-    const mensagem = document.getElementById("mensagem").value;
-    const foto = document.getElementById("foto").files[0];
     const status = document.getElementById("status");
-
-    if(!mensagem && !foto){
-        status.innerHTML = "Digite uma denúncia ou envie uma imagem.";
-        return;
-    }
 
     status.innerHTML = "Enviando denúncia...";
 
     try{
 
-        let texto =
-`🚨 NOVA DENÚNCIA ANÔNIMA
+        let mensagem = `
+🚨 NOVA DENÚNCIA ANÔNIMA
 
-${mensagem || "Imagem enviada sem texto"}
+📌 Categoria:
+${Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
+.map(el => el.value)
+.join(", ")}
+
+🏢 Unidade:
+${document.getElementById("unidade").value}
+
+👤 Relação:
+${document.getElementById("relacao").value}
+
+📍 Local:
+${document.getElementById("local").value}
+
+👥 Outras pessoas sabem?
+${document.getElementById("conhecimento").value}
+
+🧠 Quem sabia:
+${document.getElementById("quemSoube").value}
+
+⚠️ É vítima?
+${document.getElementById("vitima").value}
+
+🚨 Denunciados:
+${document.getElementById("denunciados").value}
+
+📝 Descrição:
+${document.getElementById("descricao").value}
+
+👁️ Testemunhas:
+${document.getElementById("testemunhas").value}
 
 📅 ${new Date().toLocaleString()}
 `;
 
-        if(foto){
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                chat_id:CHAT_ID,
+                text:mensagem
+            })
+        });
+
+        const arquivos = document.getElementById("foto").files;
+
+        for(let i=0;i<arquivos.length;i++){
 
             let formData = new FormData();
 
             formData.append("chat_id", CHAT_ID);
-            formData.append("caption", texto);
-            formData.append("photo", foto);
+            formData.append("photo", arquivos[i]);
 
             await fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`,{
                 method:"POST",
                 body:formData
             });
 
-        }else{
-
-            await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: texto
-                })
-            });
-
         }
 
-        status.innerHTML = "Denúncia enviada com sucesso.";
+        status.innerHTML = "✅ Denúncia enviada com sucesso.";
 
-        document.getElementById("mensagem").value = "";
-        document.getElementById("foto").value = "";
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
     }catch(e){
 
-        status.innerHTML = "Erro ao enviar denúncia.";
+        status.innerHTML = "❌ Erro ao enviar denúncia.";
 
     }
 
